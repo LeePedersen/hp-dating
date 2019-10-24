@@ -4,7 +4,10 @@ $(document).ready(function() {
     var gender = $("select#gender").val();
     var house = $("select#house").val();
 
-    if (age < 30 && gender === "female") {
+    if (!age) {
+      $(".form-control-feedback").show();
+      var match = "... people without age can't have matches";
+    } else if (age < 30 && gender === "female") {
       var match = "Hermione";
     } else if (age >= 30 && house === "gryffindor") {
       var match = "Hagrid";
@@ -12,8 +15,10 @@ $(document).ready(function() {
       var match = "Neville";
     } else if (age < 30 && gender != "female") {
       var match = "Ron";
-    } else {
+    } else if (house === "slytherin"){
       var match = "Draco";
+    } else {
+      var match = "Nicholas Flamel";
     }
     $("#match").text("Your match is " + match);
     event.preventDefault();
